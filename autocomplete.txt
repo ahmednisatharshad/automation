@@ -1,0 +1,273 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://demoqa.com/');
+  await page.getByRole('heading', { name: 'Widgets' }).click();
+  await page.getByText('Auto Complete').click();
+  await page.locator('.auto-complete__value-container').first().click();
+  await expect(page.getByRole('heading')).toContainText('Auto Complete');
+  await expect(page.locator('#autoCompleteMultiple')).toContainText('Type multiple color names');
+  await expect(page.locator('#autoCompleteSingle')).toContainText('Type single color name');
+  await page.locator('.auto-complete__value-container').first().click();
+  await page.locator('#autoCompleteMultipleInput').fill('re');
+  await page.locator('#autoCompleteMultipleInput').press('Enter');
+  await page.locator('#autoCompleteMultipleInput').fill('gr');
+  await page.locator('#autoCompleteMultipleInput').press('Enter');
+ await expect(page.getByText('Red')).toBeVisible();
+  await expect(page.getByText('Green')).toBeVisible();
+  await page.locator('.auto-complete__control.css-yk16xz-control > .auto-complete__value-container').click();
+  await page.locator('#autoCompleteSingleInput').fill('b');
+  await page.locator('#autoCompleteSingleInput').press('Enter');
+  await expect(page.getByText('Blue')).toBeVisible();
+ 
+});
+
+Open the website https://demoqa.com/.
+
+Click on the "Widgets" heading to open the Widgets section.
+
+Click on the "Auto Complete" option.
+
+Check that the page title contains "Auto Complete".
+
+Verify that the multiple and single autocomplete input fields display the correct placeholder texts.
+
+Click on the multiple autocomplete input field.
+
+Type "re" and press Enter to select "Red".
+
+Type "gr" and press Enter to select "Green".
+
+Confirm that "Red" and "Green" are shown as selected colors.
+
+Click on the single autocomplete input field.
+
+Type "b" and press Enter to select "Blue".
+
+Confirm that "Blue" is shown as the selected color.
+
+import { test, expect } from '@playwright/test';
+
+test('Auto Complete widget test on demoqa.com', async ({ page }) => {
+  await page.goto('https://demoqa.com/');
+  await page.getByRole('heading', { name: 'Widgets' }).click();
+  await page.getByText('Auto Complete').click();
+
+  await expect(page.getByRole('heading')).toContainText('Auto Complete');
+  await expect(page.locator('#autoCompleteMultiple')).toContainText('Type multiple color names');
+  await expect(page.locator('#autoCompleteSingle')).toContainText('Type single color name');
+
+  // Multiple selection input
+  await page.locator('.auto-complete__value-container').first().click();
+
+  // Select "Red"
+  await page.locator('#autoCompleteMultipleInput').fill('re');
+  await page.locator('#autoCompleteMultipleInput').press('Enter');
+
+//   // Press ArrowDown once to move from first to second item
+// await page.locator('#autoCompleteMultipleInput').press('ArrowDown');
+
+  // Select "Green"
+  await page.locator('#autoCompleteMultipleInput').fill('gr');
+  await page.locator('#autoCompleteMultipleInput').press('Enter');
+
+  // Verify Red and Green tags are visible
+  await expect(page.getByText('Red')).toBeVisible();
+  await expect(page.getByText('Green', { exact: true })).toBeVisible();
+
+  // You cannot directly get inputValue if multiselect shows tags, 
+  // but you can check inner text of the container showing selected tags
+  const multipleSelectedText = await page.locator('.auto-complete__value-container').first().innerText();
+  expect(multipleSelectedText).toContain('Red');
+  expect(multipleSelectedText).toContain('Green');
+
+  // Single selection input
+  await page.locator('.auto-complete__control.css-yk16xz-control > .auto-complete__value-container').click();
+
+  // Select "Blue"
+  await page.locator('#autoCompleteSingleInput').fill('b');
+  await page.locator('#autoCompleteSingleInput').press('Enter');
+
+  // Verify "Blue" is visible
+  await expect(page.getByText('Blue', { exact: true })).toBeVisible();
+
+  // Assert the exact input value for single select
+  const singleInputValue = await page.locator('#autoCompleteSingleInput').first().innerText();
+  expect(singleInputValue).toContain('Blue');
+});
+
+
+
+
+// steps.ts
+import { expect, Page } from '@playwright/test';
+import { AutoCompleteLocators } from '../../pages/testcase-autocomplete';
+
+
+export class AutoCompleteSteps {
+  readonly page: Page;
+  readonly locators: AutoCompleteLocators;
+
+
+  constructor(page: Page) {
+    this.page = page;
+    this.locators = new AutoCompleteLocators(page);
+  }
+
+
+  async navigateToAutoCompletePage() {
+    await this.page.goto('https://demoqa.com/', { timeout: 60000 });
+    await this.page.waitForLoadState('load');
+    await this.locators.widgetsHeading().click();
+    await this.locators.autoCompleteOption().click();
+  }
+
+
+  async verifyPageHeader() {
+    await expect(this.locators.pageHeader()).toContainText('Auto Complete');
+  }
+
+
+  async verifyPlaceholders() {
+    await expect(this.locators.multipleInputPlaceholder()).toContainText('Type multiple color names');
+    await expect(this.locators.singleInputPlaceholder()).toContainText('Type single color name');
+  }
+
+
+  async selectOptionByText(inputSelector: string, optionText: string) {
+    const inputField = this.page.locator(inputSelector);
+    await inputField.fill(optionText.slice(0, 2)); // trigger dropdown with 2 first letters
+
+
+    await this.page.waitForSelector('.auto-complete__menu-list'); // wait for dropdown options
+
+
+    const options = await this.page.$$('.auto-complete__option');
+
+
+    for (const option of options) {
+      const text = await option.textContent();
+      if (text?.trim() === optionText) {
+        await option.click();
+        break;
+      }
+    }
+  }
+
+
+  async selectMultipleColors(colors: string[]) {
+    await this.locators.multipleValueContainer().click();
+    for (const color of colors) {
+      await this.selectOptionByText('#autoCompleteMultipleInput', color);
+    }
+  }
+
+
+  async verifyMultipleSelectedColors(colors: string[]) {
+    for (const color of colors) {
+      await expect(this.locators.selectedTagByText(color)).toBeVisible();
+    }
+
+
+    const selectedText = await this.locators.multipleValueContainer().innerText();
+    colors.forEach(color => {
+      expect(selectedText).toContain(color);
+    });
+  }
+
+
+  async selectSingleColor(color: string) {
+    await this.locators.singleValueContainer().click();
+    await this.selectOptionByText('#autoCompleteSingleInput', color);
+  }
+
+
+  async verifySingleSelectedColor(color: string) {
+    await expect(this.locators.selectedTagByText(color)).toBeVisible();
+
+    const inputValue = await this.locators.singleInputField().inputValue();
+    expect(inputValue).toBe(color);
+  }
+}
+
+// autocomplete.spec.ts
+import { test } from '@playwright/test';
+import { AutoCompleteSteps } from '../../steps/testcase-autocomplete.step';
+
+
+test('Auto Complete widget test on demoqa.com with dynamic option selection - @US1025', async ({ page }) => {
+  const autoComplete = new AutoCompleteSteps(page);
+
+  // Navigate and open Auto Complete page
+  await autoComplete.navigateToAutoCompletePage();
+
+  // Verify page header and placeholders
+  await autoComplete.verifyPageHeader();
+  await autoComplete.verifyPlaceholders();
+
+
+  // Select multiple colors and verify
+  await autoComplete.selectMultipleColors(['Red', 'Green']);
+  await autoComplete.verifyMultipleSelectedColors(['Red', 'Green']);
+
+
+  // Select single color and verify
+  await autoComplete.selectSingleColor('Blue');
+  await autoComplete.verifySingleSelectedColor('Blue');
+});
+
+// locators.ts
+import { Locator, Page } from '@playwright/test';
+
+export class AutoCompleteLocators {
+  readonly page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  widgetsHeading(): Locator {
+    return this.page.getByRole('heading', { name: 'Widgets' });
+  }
+
+  autoCompleteOption(): Locator {
+    return this.page.getByText('Auto Complete');
+  }
+
+  pageHeader(): Locator {
+    return this.page.getByRole('heading');
+  }
+
+  multipleInputPlaceholder(): Locator {
+    return this.page.locator('#autoCompleteMultiple');
+  }
+
+  singleInputPlaceholder(): Locator {
+    return this.page.locator('#autoCompleteSingle');
+  }
+
+  multipleValueContainer(): Locator {
+    return this.page.locator('.auto-complete__value-container').first();
+  }
+
+  multipleInputField(): Locator {
+    return this.page.locator('#autoCompleteMultipleInput');
+  }
+
+  autoCompleteDropdownOptions(): Locator {
+    return this.page.locator('.auto-complete__option');
+  }
+
+  singleValueContainer(): Locator {
+    return this.page.locator('.auto-complete__control.css-yk16xz-control > .auto-complete__value-container');
+  }
+
+  singleInputField(): Locator {
+    return this.page.locator('#autoCompleteSingleInput');
+  }
+
+  selectedTagByText(color: string): Locator {
+    return this.page.getByText(color, { exact: true });
+  }
+}
+

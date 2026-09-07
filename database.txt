@@ -1,0 +1,31 @@
+
+Install Required Libraries:
+
+For MySQL: npm install mysql2
+
+
+
+const mysql = require('mysql2/promise');
+const { test, expect } = require('@playwright/test');
+
+test('Read data from MySQL database', async ({ page }) => {
+  // Create a connection to the database
+  const connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'your_username',
+    password: 'your_password',
+    database: 'your_database',
+  });
+
+  // Query the database
+  const [rows] = await connection.execute('SELECT * FROM your_table WHERE id = ?', [1]);
+
+  console.log('Database Result:', rows);
+
+  // Use the data in your Playwright test
+  await page.goto('https://example.com');
+  await page.fill('#inputField', rows[0].column_name);
+
+  // Close the connection
+  await connection.end();
+});
