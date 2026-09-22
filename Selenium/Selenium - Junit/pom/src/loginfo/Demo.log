@@ -1,0 +1,12 @@
+2025-03-11 12:01:44.546 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:40)] - UserName is Enabled
+2025-03-11 12:01:44.671 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:46)] - Password is Enabled
+2025-03-11 12:01:44.761 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:52)] - Login Button is Enabled
+2025-03-11 12:01:44.816 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:54)] - Log in successfully
+2025-03-11 12:02:12.495 INFO [main] [com.htc.pom.pages.CartPlayground.checkout(CartPlayground.java:72)] - Checked out successfully
+2025-03-11 12:02:18.447 INFO [main] [com.htc.pom.pages.LogoutPlayground.logout(LogoutPlayground.java:32)] - Log out successfully
+2025-03-11 12:45:49.984 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:40)] - UserName is Enabled
+2025-03-11 12:45:50.091 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:46)] - Password is Enabled
+2025-03-11 12:45:50.190 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:52)] - Login Button is Enabled
+2025-03-11 12:45:50.258 INFO [main] [com.htc.pom.pages.LoginPlayground.sign_In(LoginPlayground.java:54)] - Log in successfully
+2025-03-11 12:46:08.095 INFO [main] [com.htc.pom.pages.CartPlayground.checkout(CartPlayground.java:72)] - Checked out successfully
+2025-03-11 12:46:13.306 INFO [main] [com.htc.pom.pages.LogoutPlayground.logout(LogoutPlayground.java:32)] - Log out successfully

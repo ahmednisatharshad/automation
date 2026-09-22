@@ -1,0 +1,13 @@
+2025-03-05 18:09:01.327 INFO [main] [com.htc.test.main.Webtables.main(Webtables.java:25)] - 7
+2025-03-05 18:09:01.391 INFO [main] [com.htc.test.main.Webtables.main(Webtables.java:26)] - 10
+2025-03-05 18:09:01.405 INFO [main] [com.htc.test.main.Webtables.main(Webtables.java:28)] - The number of pages:10
+2025-03-05 18:14:44.903 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:30)] - Drop down is enabled
+2025-03-05 18:14:45.092 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:40)] - search input is enabled
+2025-03-05 18:14:45.207 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:56)] - Auto Suggestions count:2
+2025-03-05 18:14:45.222 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:60)] - Values are =Italy
+2025-03-05 18:14:45.375 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:63)] - The country Italy is clicked
+2025-03-05 18:16:45.983 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:30)] - Drop down is enabled
+2025-03-05 18:16:46.730 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:40)] - search input is enabled
+2025-03-05 18:16:46.870 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:56)] - Auto Suggestions count:2
+2025-03-05 18:16:46.883 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:60)] - Values are =Italy
+2025-03-05 18:16:47.043 INFO [main] [com.htc.test.main.Bootstrap.main(Bootstrap.java:63)] - Italy is clicked
