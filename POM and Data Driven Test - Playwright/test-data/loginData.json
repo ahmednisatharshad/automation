@@ -1,0 +1,14 @@
+{
+  "credential1" : {
+    "email": "ahmednisatharshad10@gmail.com",
+    "password": "Pass@123"
+  },
+   "credential2" : {
+    "email": "ahmednisatharshad07@gmail.com",
+    "password": "Pass@123"
+  },
+   "credential3" : {
+    "email": "ahmednisatharshad10@gmail.com",
+    "password": "Pass@12"
+  }
+}

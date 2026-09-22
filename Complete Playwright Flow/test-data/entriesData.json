@@ -1,0 +1,35 @@
+[
+  {
+    "firstName": "Rishi",
+    "lastName": "Deshmukh",
+    "email": "rishi@example.com",
+    "age": "46",
+    "salary": "50000",
+    "department": "Bank"
+  },
+   {
+    "firstName": "Kavipriya",
+    "lastName": "Thiyagarajan",
+    "email": "kavipriya@example.com",
+    "age": "22",
+    "salary": "30000",
+    "department": "IT"
+  },
+  {
+    "firstName": "Ananya",
+    "lastName": "Rao",
+    "email": "ananya@example.com",
+    "age": "29",
+    "salary": "42000",
+    "department": "Marketing"
+  },
+  {
+    "firstName": "Tharun",
+    "lastName": "kumar",
+    "email": "tharun@example.com",
+    "age": "32",
+    "salary": "35000",
+    "department": "Marketing"
+  }
+
+]

@@ -1,0 +1,13 @@
+{
+  "firstName": "Veera",
+  "lastName": "Raghavan",
+  "email": "beast@gmail.com",
+  "gender": "Male",
+  "mobile": "8760787623",
+  "dob": { "day": "10", "month": "7", "year": "2002" },
+  "subject": "Computer Science",
+  "picture": "Capture.jpg",
+  "address": "XYZ street",
+  "state": "Haryana",
+  "city": "Karnal"
+}

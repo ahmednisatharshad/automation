@@ -1,0 +1,34 @@
+[
+  {
+    "firstName": "Coolie",
+    "lastName": "Deva",
+    "email": "coolie@powerhouse.com",
+    "age": "78",
+    "salary": "20000",
+    "department": "Business"
+  },
+  {
+    "firstName": "Veeraragavan",
+    "lastName": "Beast",
+    "email": "beastmode@anil.com",
+    "age": "51",
+    "salary": "40000",
+    "department": "Army"
+  },
+  {
+    "firstName": "Arshad",
+    "lastName": "AR",
+    "email": "arshad@legend.com",
+    "age": "23",
+    "salary": "22600",
+    "department": "IT"
+  },
+  {
+    "firstName": "Ajith",
+    "lastName": "Kumar",
+    "email": "AKThala@racing.com",
+    "age": "52",
+    "salary": "30000",
+    "department": "Mechanic"
+  }
+]
